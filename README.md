@@ -43,6 +43,10 @@ A similar tuning problem showed up in the AI explanation layer: early prompts pr
 - Used the Claude API to generate 2-sentence, plain-English explanations for the top 5 highest-confidence anomalies
 - Each explanation states what the anomaly indicates and what action a maintenance engineer should take — under 20 words per sentence, validated against the actual output
 - Total cost for 5 explanations: under 2 cents, tracked using real token counts from the API response rather than estimates
+
+**Note:**
+anomaly detection flags statistically unusual readings independent of failure outcome. 4 of 5 top anomalies had not yet resulted in failure — consistent with the goal of early warning rather than after-the-fact detection. 1 anomaly corresponded to an actual failure, offering preliminary validation of the method's predictive value.
+
 ---
 ## Tools and methods
 
