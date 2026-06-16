@@ -37,15 +37,17 @@ A similar tuning problem showed up in the AI explanation layer: early prompts pr
 **Anomaly detection results**
 - Z-score (threshold=2): 224 anomalies detected (2.24%)
 - IQR (multiplier=0.75): 263 anomalies detected (2.63%)
-- 218 readings flagged by both methods — 97% agreement between two independent approaches, representing highest-confidence alerts
+- Isolation Forest (multivariate, contamination=0.02): applied across all 5 sensor variables simultaneously — catches combinations of unusual readings that single-variable methods miss entirely
+- Top anomalies selected by requiring confirmation from all 3 methods, representing highest-confidence alerts with multi-method consensus
 
 **AI-generated explanations**
 - Used the Claude API to generate 2-sentence, plain-English explanations for the top 5 highest-confidence anomalies
 - Each explanation states what the anomaly indicates and what action a maintenance engineer should take — under 20 words per sentence, validated against the actual output
 - Total cost for 5 explanations: under 2 cents, tracked using real token counts from the API response rather than estimates
 
-**Note:**
-anomaly detection flags statistically unusual readings independent of failure outcome. 4 of 5 top anomalies had not yet resulted in failure — consistent with the goal of early warning rather than after-the-fact detection. 1 anomaly corresponded to an actual failure, offering preliminary validation of the method's predictive value.
+**Note on anomaly vs failure**
+
+Anomaly detection flags statistically unusual readings independent of failure outcome. All 5 top anomalies (confirmed by all 3 methods) had not yet resulted in machine failure — this is the intended behavior. The goal of predictive maintenance is early warning before failure occurs, not after-the-fact reporting. A reading can be genuinely anomalous — unusual temperature, torque, or multi-sensor combination — without having crossed into failure yet. These are exactly the readings a maintenance engineer should act on.
 
 ---
 ## Tools and methods
