@@ -51,6 +51,13 @@ A similar tuning problem showed up in the AI explanation layer: early prompts pr
 Anomaly detection flags statistically unusual readings independent of failure outcome. All 5 top anomalies (confirmed by all 3 methods) had not yet resulted in machine failure — this is the intended behavior. The goal of predictive maintenance is early warning before failure occurs, not after-the-fact reporting. A reading can be genuinely anomalous — unusual temperature, torque, or multi-sensor combination — without having crossed into failure yet. These are exactly the readings a maintenance engineer should act on.
 
 ---
+## Limitations and next steps
+
+- Anomaly detection is univariate (z-score, IQR) and multivariate (Isolation Forest) but does not yet include a predictive failure model — a Random Forest or XGBoost classifier would quantify failure probability
+- This analysis lacks real maintenance technician logs. In a production system, technician feedback (confirmed alerts, false positives, threshold recommendations) would feed back into the detection pipeline to improve 
+  accuracy over time
+- The AI explanation layer was tested on 5 anomalies — scaling to production volume would require batching API calls and caching repeated explanations to manage cost 
+---
 ## Tools and methods
 
 | Category | Detail |
