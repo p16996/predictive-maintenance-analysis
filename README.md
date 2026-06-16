@@ -37,8 +37,9 @@ A similar tuning problem showed up in the AI explanation layer: early prompts pr
 **Anomaly detection results**
 - Z-score (threshold=2): 224 anomalies detected (2.24%)
 - IQR (multiplier=0.75): 263 anomalies detected (2.63%)
-- Isolation Forest (multivariate, contamination=0.02): applied across all 5 sensor variables simultaneously — catches combinations of unusual readings that single-variable methods miss entirely
-- Top anomalies selected by requiring confirmation from all 3 methods, representing highest-confidence alerts with multi-method consensus
+- Isolation Forest (multivariate, contamination=0.02): 200 anomalies detected across all 5 sensor variables simultaneously — catches combinations of unusual readings that single-variable methods miss
+- 54 readings flagged by all 3 methods — representing highest-confidence alerts with full multi-method consensus
+- Standard thresholds tuned down from defaults (z=3, IQR=1.5) because temperature drifts gradually rather than spiking abruptly
 
 **AI-generated explanations**
 - Used the Claude API to generate 2-sentence, plain-English explanations for the top 5 highest-confidence anomalies
